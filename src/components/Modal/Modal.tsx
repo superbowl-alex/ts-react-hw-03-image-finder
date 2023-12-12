@@ -1,5 +1,6 @@
 import { Component, MouseEvent, KeyboardEvent } from 'react';
 import { createPortal } from 'react-dom';
+import { Overlay, ModalWindow } from './Modal.styled';
 import { Hit  } from '../../Services/fetchImages';
 
 interface IModal {
@@ -34,11 +35,11 @@ class Modal extends Component<IModal> {
     const { image } = this.props;
     return modalRoot
     ? createPortal(
-        <div className='fixed flex justify-center items-center top-0 left-0 w-screen h-screen bg-overlayColor' onClick={this.handleBackDropClick}>
-          <div className='max-w-calc-vw-48 max-h-calc-vh-24'>
+        <Overlay onClick={this.handleBackDropClick}>
+          <ModalWindow>
             <img src={image.largeImageURL} alt={image.tags} />
-          </div>
-        </div>,
+          </ModalWindow>
+        </Overlay>,
         modalRoot
       )
     : null;

@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import OnlyScroll from 'only-scrollbar';
+import GlobalStyles from '../../GlobalStyles';
 import {
   fetchImagesWithQuery,
   HITS_PER_PAGE,
@@ -12,6 +13,7 @@ import Button from '../Button';
 import ImageGallery from '../ImageGallery';
 import ErrorMessage from '../ErrorMessage';
 import Loader from '../Loader';
+import { Container } from './App.styled';
 
 // Creating an instance of a class OnlyScroll (adds inertia for increased smoothness)
 new OnlyScroll(document.scrollingElement, {
@@ -104,7 +106,8 @@ export default class App extends Component<{}, AppState> {
     const { items, isLoading, error, endOfCollection } = this.state;
 
     return (
-      <div className='grid grid-cols-1 gap-4 pb-4'>
+      <Container>
+        <GlobalStyles />
         <Searchbar onSubmit={this.formSubmitHandler} />
         <ImageGallery items={items} />
         {error && <ErrorMessage />}
@@ -113,7 +116,7 @@ export default class App extends Component<{}, AppState> {
           <Button loadMore={this.loadMore} isSubmitting={isLoading} />
         )}
         <ToastContainer />
-      </div>
+      </Container>
     );
   }
 }
